@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevimlilar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style_2.css">
+    <script src="/static/js/script.js" defer></script>
+    <script src="/static/js/cart.js" defer> </script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="max-w-5xl mx-auto p-6">
+        <nav class="flex justify-between p-4 bg-white shadow-md rounded-lg">
+            <a href="{% url 'main:cart' %}" class="text-purple-600">Savat</a>
+            <a href="{% url 'main:home' %}"class="text-purple-600">Asosiy</a>
+            <a href="{% url 'main:process_payment' %}" class="text-purple-600">To'lov</a>
+        </nav>
+
+        <h1 class="text-3xl font-bold text-center text-purple-700 mt-4">Sevimlilar</h1>
+        
+        <div class="bg-white shadow-md rounded-lg p-6 mt-6">
+            {% if favorites %}
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-gray-700 border-b">
+                            <th class="p-1">Mahsulot</th>
+                            <th class="p-2">Harakat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in favorites %}
+                        <tr id="favorite-item-{{ item.id }}" class="border-b">
+                            <td class="p-1 flex items-center">
+                                <img src="{{ item.book.image.url }}" alt="Book" class="w-12 h-12 mr-2">
+                                <span class="whitespace-nowrap">{{ item.book.title }}</span>
+                            </td>
+                            <td class="p-2 text-center">
+                                <div class="flex gap-2 justify-center">
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded add-to-cart" data-id="{{ item.book.id }}">Add to Cart</button>
+                                    <button class="px-4 py-2 bg-red-600 text-white rounded remove-favorite" data-id="{{ item.id }}">Remove</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center text-gray-600">Hali sevimli kitoblar yo'q</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

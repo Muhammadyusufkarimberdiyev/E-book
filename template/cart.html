@@ -1,0 +1,70 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/static/js/cart.js" defer></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="max-w-5xl mx-auto p-6">
+        <nav class="flex justify-between p-4 bg-white shadow-md rounded-lg">
+            <a href="{% url 'main:favorites' %}" class="text-purple-600">Sevimlilar</a>
+            <a href="{% url 'main:home' %}"class="text-purple-600">Asosiy</a>
+            <a href="{% url 'main:process_payment' %}" class="text-purple-600">To'lov</a>
+        </nav>
+
+        <h1 class="text-3xl font-bold text-center text-purple-700 mt-4">Savat</h1>
+        
+        <div class="bg-white shadow-md rounded-lg p-6 mt-6">
+            {% if cart_items %}
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-gray-700 border-b">
+                            <th class="p-2">Mahsulot</th>
+                            <th class="p-2">Soni</th>
+                            <th class="p-2">Jami</th>
+                            <th class="p-2">Harakat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                        <tr id="cart-item-{{ item.id }}" class="border-b">
+                            <td class="p-2 flex items-center">
+                                <img src="{{ item.book.image.url }}" alt="Book" class="w-12 h-12 mr-2">
+                                <span>{{ item.book.title }}</span>
+                            </td>
+                            <td class="p-2">
+                                <button class="px-2 bg-purple-600 text-white rounded update-quantity" data-id="{{ item.id }}" data-action="decrease">-</button>
+                                <span class="mx-2">{{ item.quantity }}</span>
+                                <button class="px-2 bg-purple-600 text-white rounded update-quantity" data-id="{{ item.id }}" data-action="increase">+</button>
+                            </td>
+                            <td class="p-2">${{ item.total_price }}</td>
+                            <td class="p-2">
+                                <button class="text-red-500 remove-item" data-id="{{ item.id }}">🗑</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                <button class="mt-4 px-4 py-2 bg-purple-700 text-white rounded w-full">Savatni yangilash</button>
+            {% else %}
+                <p class="text-center text-gray-600">Sizning savatingiz bo'sh</p>
+            {% endif %}
+        </div>
+        
+        <div class="bg-white shadow-md rounded-lg p-6 mt-6">
+            <h2 class="text-xl font-semibold">Buyurtma xulosasi</h2>
+            <div class="mt-4 text-gray-700">
+                <p>Qoʻshimcha jami: <span class="float-right">${{ total_price }}</span></p>
+                <hr class="my-2">
+                <p class="text-lg font-bold">Jami: <span class="float-right">${{ total_price }}</span></p>
+            </div>
+            <a href="{% url 'main:process_payment' %}" class="mt-4 px-4 py-2 bg-black text-white rounded w-full block text-center">Hozir hisob-kitob qiling</a>
+        </div>
+    </div>
+</body>
+</html>

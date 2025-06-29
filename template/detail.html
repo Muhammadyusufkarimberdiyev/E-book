@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ i.title }} - Ebook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/fontawesome.css">
+    <link rel="stylesheet" href="/static/css/style1.css">
+</head>
+
+<body>
+    <header class="header-area">
+        <div class="container">
+            <h1 class="text-center my-4">{{ i.title }}</h1>
+            <nav>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:back' %}">Orqaga</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="book-detail-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="book-image-container">
+                        <img src="{{ i.image.url }}" alt="{{ i.title }}" class="book-image img-fluid rounded shadow">
+                        <span class="category-badge">{{ i.category }}</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="book-info">
+                        <h2>{{ i.title }}</h2>
+                        <p class="text-muted mb-3">{{ i.text }}</p>
+                        <div class="book-price">
+                            <span class="price-value"><em>$</em>{{ i.price }}</span>
+                        </div>
+                        <p><strong>Sotilganlar:</strong> {{ i.sold }}</p>
+                        <p><strong>Ko'rilgan:</strong> {{ i.views }} ta</p>
+                       
+                        <div class="d-flex mt-3">
+                            <div class="me-2">
+                                <a href="{{ i.file.url }}" class="btn btn-primary">Kitobni O'qing</a>
+                            </div>
+                            <div>
+                                <a href="{{ i.file.url }}" download class="btn btn-success">Kitobni Yuklab Olish</a>
+                            </div>
+                            <a href="{% url 'main:add_to_cart' i.id %}">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                            <a href="{% url 'main:add_to_favorites' i.id %}">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>Designed by <a href="https://t.me/Islombek_7010" target="_blank">Islombek.me</a></p>
+        </div>
+    </footer>
+
+    <script src="/static/jquery/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

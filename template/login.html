@@ -1,0 +1,31 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container login-container">
+            <form id="login-form" action="" method="post">
+                {% csrf_token %}
+                <h1>Kirish</h1>
+
+                <!-- Xatolik xabarini ko'rsatish -->
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Kirish</button>
+                <p class="switch">Hisobingiz yo'qmi?<a href="http://localhost:8000/register">Bu yerda roʻyxatdan oʻting</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

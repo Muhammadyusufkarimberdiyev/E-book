@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../static/images/E-library-Logo.jpg" style="border-radius: 50%;">
+    <title>Ebook</title>
+
+
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" href="/static/css/fontawesome.css">
+    <link rel="stylesheet" href="/static/css/templatemo-scholar.css">
+    <link rel="stylesheet" href="/static/css/owl.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
+ 
+  </head>
+
+<body>
+
+ 
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+
+      </div>
+    </div>
+  </div>
+  <header class="header-area header-sticky">
+    <div class="container">
+      
+        <div class="row">
+            <div class="col-12">
+        
+                <nav class="main-nav">
+           
+             
+             
+
+                  <div class="col-md-2">
+
+             
+                      <div class="search-input">
+                
+                      <form id="search" action="search" method="post">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Qidiruv ...">
+                
+                        <i class="fa fa-search"></i>
+                      </form>
+                   
+                    </div>
+                
+                </div>
+
+                  <div class="col-md-9">
+                    <ul class="nav">
+                      <li><a href="#top" class="active">Asosiy</a></li>
+                      <li><a href="#events">Audio kitoblar</a></li>
+                      <li><a href="#courses">Elektron kitoblar</a></li>
+                      <li><a href="#contact">Contact</a></li>
+                      <li><a href="{% url 'main:cart' %}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                      <li><a href="{% url 'main:favorites' %}"><i class="fa-regular fa-heart"></i></a></li>
+                      <li><a href="{% url 'main:process_payment' %}"><i class="fa-regular fa-credit-card"></i></a></li>
+                      <li><a href="{% url 'main:logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Chiqish</a></li>
+                  
+                  </ul>
+
+                  <a class='menu-trigger'>
+                      <span>Menu</span> 
+                  </a>
+
+
+                  </div>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+  <div class="main-banner" id="top">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-banner">
+            
+            <div class="item item-1">
+              
+              <div class="header-text">
+       
+                <h1>Hush kelibsiz Ebook kutubxonasiga</h1>
+                <p>EBook – bu elektron kutubxona bo‘lib, foydalanuvchilarga kitoblarni onlayn o‘qish va yuklab olish imkoniyatini beradi. Har qanday joyda va istalgan vaqtda foydalanish mumkin.</p>
+        
+        
+              </div>
+            </div>
+            <div class="item item-2">
+              <div class="header-text">
+                <h1>Hush kelibsiz Ebook kutubxonasiga</h1>
+                <p>EBook – bu elektron kutubxona bo‘lib, foydalanuvchilarga kitoblarni onlayn o‘qish va yuklab olish imkoniyatini beradi. Har qanday joyda va istalgan vaqtda foydalanish mumkin.</p>
+        
+        
+              </div>
+            </div>
+            <div class="item item-3">
+              
+              <div class="header-text">
+                <h1>Hush kelibsiz Ebook kutubxonasiga</h1>
+                <p>EBook – bu elektron kutubxona bo‘lib, foydalanuvchilarga kitoblarni onlayn o‘qish va yuklab olish imkoniyatini beradi. Har qanday joyda va istalgan vaqtda foydalanish mumkin.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <section class="section courses" id="courses" >
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h6>Bo'lim</h6>
+            <h2>Kitoblar</h2>
+          </div>
+        </div>
+      </div>
+      <ul>
+
+      </ul>
+      <ul class="event_filter">
+   
+        {% for c in category %}
+        <li class="scroll-to-section"><a href="{% url 'main:category' c.id %}">{{c.name}}</a></li>
+        {% endfor %}
+
+      </ul>
+      
+
+      <div class="row event_box">
+
+
+        {% for i in books %}
+        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 design">
+          <div class="events_item">
+            <div class="thumb">
+              <a href="#"><img src="{{ i.image.url }}" width="90%" height="300px" alt=""></a>
+              <span class="category">{{i.category}}</span>
+              <span class="price"><h6><em>$</em>{{i.price}}</h6></span>
+            </div>
+            <div class="down-content">
+          
+              <span class="sold">Sotilganlar:{{i.sold}}</span>
+              <a href="{% url 'main:Read' i.id %}"><h4>{{ i.title }}</h4></a>
+        
+              <div class="right">
+                <a href="{% url 'main:add_to_cart' i.id %}">
+                  <i class="fa-solid fa-cart-shopping"></i>
+              </a>
+              <a href="{% url 'main:add_to_favorites' i.id %}">
+                  <i class="fa-solid fa-heart"></i>
+              </a>
+              
+              </div>
+         
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+   
+  </div>
+  </section>
+
+  <div class="section fun-facts">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="wrapper">
+            <div class="row">
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="6500" data-speed="1000"></h2>
+                   <p class="count-text ">Aktiv obunachilar</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="8004" data-speed="1000"></h2>
+                  <p class="count-text ">Obunalar</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="50" data-speed="1000"></h2>
+                  <p class="count-text ">Ishlovchi obunachilar</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter end">
+                  <h2 class="timer count-title count-number" data-to="1" data-speed="1000"></h2>
+                  <p class="count-text ">Yil ish tajribasi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<div class="section events" id="events">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12 text-center">
+              <div class="section-heading">
+                  <h6>Bo'lim</h6>
+                  <h2>Audio kitoblar</h2>
+              </div>
+          </div>
+          <div class="col-lg-12 col-md-6">
+            
+              {% for i in audio %}
+                  <div class="item mb-4">
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <div class="image">
+                                  <img src="{{ i.image.url }}" alt="">
+                              </div>
+                          </div>
+                          <div class="col-lg-9">
+                              <ul>
+                                  <li>
+                                      <span class="category">{{ i.category }}</span>
+                                      <h4>{{ i.title }}</h4>
+                                  </li>
+                                  <li>
+                                      <span>Sana</span>
+                                      <h6>{{ i.reg_date }}</h6>
+                                  </li>
+                                  
+                                  <a href="{% url 'main:add_to_cart' i.id %}">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                                <a href="{% url 'main:add_to_favorites' i.id %}">
+                                    <i class="fa-solid fa-heart"></i>
+                                </a>
+                                
+                                  <li>
+                                      <span>Ko'rishlar soni</span>
+                                      <h6>{{ i.views }}</h6>
+                                  </li>
+                                  <li>
+                                      <span>Narxi</span>
+                                      <h6>${{ i.price }}</h6>
+                                  </li>
+                                  <li>
+                                      <a href="{% url 'main:adetail' i.id %}">To'liq</a>
+                                  </li>
+                 
+                            
+                              
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+</div>
+
+
+  <div class="contact-us section" id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6  align-self-center">
+          <div class="section-heading">
+            <h6>Biz bilan bog'laning</h6>
+            <h2>Istalgan vaqtda biz bilan bog'lanishingiz mumkin</h2>
+            <p>Kitoblarni tanlaganingiz uchun tashakkur. Biz sizga eng yaxshi kitoblarni 50% chegirma bilan taqdim etamiz. Saytimizni do'stlaringiz bilan baham ko'rish orqali bizni qo'llab-quvvatlashingiz mumkin.</p>
+            <div class="special-offer">
+          
+              <h6>Sana: <em>24 Aprel 2026</em></h6>
+       
+              <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+   
+        <div class="col-lg-6">
+          <div class="contact-us-content">
+            <form id="contact-form" action="" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-lg-12"> 
+                  <fieldset>
+                    <input type="text" name="name" id="name" placeholder="Sizning ismingiz" autocomplete="on" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <input type="email" name="email" id="email" placeholder="Sizning E-mail..." required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <textarea name="message" id="message" placeholder="Sizning xabaringiz" required></textarea>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="orange-button">Hozir yuboring</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>&nbsp;&nbsp;&nbsp; Dizayn: <a href="https://t.me/Islombek_7010" rel="nofollow" target="_blank">Islombek.me</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="/static/jquery/jquery.min.js"></script>
+  <script src="/stactic/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/static/js/isotope.min.js"></script>
+  <script src="/static/js/owl-carousel.js"></script>
+  <script src="/static/js/counter.js"></script>
+  <script src="/static/js/custom.js"></script>
+
+  </body>
+</html>
